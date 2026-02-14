@@ -213,7 +213,7 @@ def show_results(screen, clock, score, highscore):
 
         pygame.display.flip()
 
-        for event in pygame.event.get():wd
+        for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 pygame.quit()
                 sys.exit()
