@@ -27,10 +27,8 @@ def load_image(path, width, height):
             scaled = pygame.transform.scale(img, (width, height))
             _image_cache[cache_key] = scaled
             return scaled
-        except Exception as e:
-            print(f"[v0] Error loading image {path}: {e}")
+        except Exception:
             return None
-    print(f"[v0] Image file not found: {path}")
     return None
 
 
@@ -49,13 +47,10 @@ def draw_player(screen, x, y, radius):
 def draw_zombie(screen, x, y, radius, king=False, dt=0.016):
     """Draw zombie - image or circle."""
     img_path = ZOMBIE_KING_IMG if king else ZOMBIE_IMG
-    img = load_image(img_path, radius * 2, radius * 2)
+    img = load_image(img_path, radius * 3, radius * 3)
     if img:
-        screen.blit(img, (int(x) - radius, int(y) - radius))
+        screen.blit(img, (int(x) - radius * 1.5, int(y) - radius * 1.5))
     else:
-        # Fallback to circle if image not found
-        if not king:
-            print(f"[v0] Regular zombie image failed to load from: {img_path}")
         color = (180, 0, 180) if king else (170, 60, 60)
         pygame.draw.circle(screen, color, (int(x), int(y)), radius)
 
