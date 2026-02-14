@@ -199,7 +199,7 @@ class Zombie:
     def __init__(self, x, y, level, king=False):
         self.x = x
         self.y = y
-        self.radius = 20
+        self.radius = 22 if king else 16
         self.level = level
         self.king = king
         self.vulnerable = False
