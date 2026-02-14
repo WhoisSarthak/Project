@@ -3,7 +3,7 @@ import sys
 import math
 import random
 from room import Room
-from design import draw_player, draw_zombie, draw_projectile, draw_blade
+from design import draw_player, draw_zombie, draw_projectile, draw_blade, draw_background
 
 # ============================
 # Utility Functions
@@ -59,7 +59,7 @@ class Player:
     def __init__(self, x, y):
         self.x = x
         self.y = y
-        self.radius = 16
+        self.radius = 20
         self.max_hp = 100
         self.hp = self.max_hp
         self.blade = Blade(self)
@@ -199,7 +199,7 @@ class Zombie:
     def __init__(self, x, y, level, king=False):
         self.x = x
         self.y = y
-        self.radius = 20
+        self.radius = 22 if king else 16
         self.level = level
         self.king = king
         self.vulnerable = False
@@ -300,9 +300,14 @@ def run_game(screen, clock, difficulty):
         # Blade collision with zombies
         if blade_tip and player.blade.active:
             bx, by = blade_tip
+            blade_hit = False
             for z in room.zombies:
-                if z.is_alive() and z.vulnerable and math.hypot(z.x - bx, z.y - by) < z.radius:
+                dist = math.hypot(z.x - bx, z.y - by)
+                # Collision radius is half the visual image size (image is radius*6, so collision is radius*3)
+                collision_radius = z.radius * 3
+                if z.is_alive() and z.vulnerable and dist < collision_radius:
                     z.alive = False
+                    blade_hit = True
                     
                     if z.king:
                         # King zombie killed
@@ -320,13 +325,14 @@ def run_game(screen, clock, difficulty):
                             room.generate_zombies()
                         
                         projectiles.clear()
-                        
-                        # Reset zombie vulnerability
-                        for z in room.zombies:
-                            z.vulnerable = False
+            
+            # Reset zombie vulnerability after blade hit
+            if blade_hit:
+                for z in room.zombies:
+                    z.vulnerable = False
 
         # Render
-        screen.fill((15, 15, 20))
+        draw_background(screen, 800, 600)
         
         player.draw(screen)
         for z in room.zombies:
