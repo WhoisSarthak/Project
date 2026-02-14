@@ -54,6 +54,8 @@ def draw_zombie(screen, x, y, radius, king=False, dt=0.016):
         screen.blit(img, (int(x) - radius, int(y) - radius))
     else:
         # Fallback to circle if image not found
+        if not king:
+            print(f"[v0] Regular zombie image failed to load from: {img_path}")
         color = (180, 0, 180) if king else (170, 60, 60)
         pygame.draw.circle(screen, color, (int(x), int(y)), radius)
 
