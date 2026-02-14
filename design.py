@@ -5,7 +5,7 @@ import os
 PLAYER_IMG = "assest/player/idle.png"
 ZOMBIE_IMG = "assest/zombie/zombieidle.png"
 ZOMBIE_KING_IMG = "assest/zombie/king.png"
-PROJECTILE_IMG = "assest/projectile.png"
+PROJECTILE_IMG = "assest/projectile/projectile.png"
 SWORD_IMG = "assest/sword.png"
 
 
