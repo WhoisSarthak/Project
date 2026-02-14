@@ -15,11 +15,18 @@ _image_cache = {}
 
 
 def load_image(path, width, height):
-    """Load image from path, return scaled surface or None if not found."""
+    """Load image from path, return scaled surface or None if not found. Uses caching."""
+    cache_key = (path, width, height)
+    
+    if cache_key in _image_cache:
+        return _image_cache[cache_key]
+    
     if os.path.exists(path):
         try:
             img = pygame.image.load(path)
-            return pygame.transform.scale(img, (width, height))
+            scaled = pygame.transform.scale(img, (width, height))
+            _image_cache[cache_key] = scaled
+            return scaled
         except Exception as e:
             print(f"[v0] Error loading image {path}: {e}")
             return None
