@@ -69,11 +69,9 @@ def draw_projectile(screen, x, y, radius, is_king=False):
 def draw_background(screen, width, height):
     """Draw background - tiled image or solid color."""
     img = load_image(BACKGROUND_IMG, width, height)
-    print(f"[v0] Background image path: {BACKGROUND_IMG}, loaded: {img is not None}")
     if img:
         screen.blit(img, (0, 0))
     else:
-        print(f"[v0] Using fallback green background")
         screen.fill((34, 139, 34))  # Fallback to green
 
 
