@@ -302,7 +302,10 @@ def run_game(screen, clock, difficulty):
             bx, by = blade_tip
             blade_hit = False
             for z in room.zombies:
-                if z.is_alive() and z.vulnerable and math.hypot(z.x - bx, z.y - by) < z.radius:
+                dist = math.hypot(z.x - bx, z.y - by)
+                if z.king:
+                    print(f"[v0] King check - alive: {z.is_alive()}, vulnerable: {z.vulnerable}, dist: {dist}, radius: {z.radius}")
+                if z.is_alive() and z.vulnerable and dist < z.radius:
                     z.alive = False
                     blade_hit = True
                     
