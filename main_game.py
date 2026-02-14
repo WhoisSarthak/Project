@@ -328,9 +328,9 @@ def run_game(screen, clock, difficulty):
         # Render
         screen.fill((15, 15, 20))
         
-    player.draw(screen)
-    for z in room.zombies:
-        z.draw(screen, dt)
+        player.draw(screen)
+        for z in room.zombies:
+            z.draw(screen, dt)
         for p in projectiles:
             p.draw(screen)
 
