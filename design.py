@@ -2,6 +2,7 @@ import pygame
 import os
 
 # Asset paths
+BACKGROUND_IMG = "assest/background.png"
 PLAYER_IMG = "assest/player/idle.png"
 ZOMBIE_IMG = "assest/zombie/zombieidle.png"
 ZOMBIE_KING_IMG = "assest/zombie/king.png"
@@ -63,6 +64,15 @@ def draw_projectile(screen, x, y, radius, is_king=False):
     else:
         color = (255, 140, 0) if is_king else (230, 70, 70)
         pygame.draw.circle(screen, color, (int(x), int(y)), radius)
+
+
+def draw_background(screen, width, height):
+    """Draw background - tiled image or solid color."""
+    img = load_image(BACKGROUND_IMG, width, height)
+    if img:
+        screen.blit(img, (0, 0))
+    else:
+        screen.fill((34, 139, 34))  # Fallback to green
 
 
 def draw_blade(screen, x1, y1, x2, y2, width):

@@ -3,7 +3,7 @@ import sys
 import math
 import random
 from room import Room
-from design import draw_player, draw_zombie, draw_projectile, draw_blade
+from design import draw_player, draw_zombie, draw_projectile, draw_blade, draw_background
 
 # ============================
 # Utility Functions
@@ -332,7 +332,7 @@ def run_game(screen, clock, difficulty):
                     z.vulnerable = False
 
         # Render
-        screen.fill((15, 15, 20))
+        draw_background(screen, 800, 600)
         
         player.draw(screen)
         for z in room.zombies:
