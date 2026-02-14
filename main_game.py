@@ -303,8 +303,8 @@ def run_game(screen, clock, difficulty):
             blade_hit = False
             for z in room.zombies:
                 dist = math.hypot(z.x - bx, z.y - by)
-                # Collision radius is half the visual image size (image is radius*4, so collision is radius*2)
-                collision_radius = z.radius * 2
+                # Collision radius is half the visual image size (image is radius*6, so collision is radius*3)
+                collision_radius = z.radius * 3
                 if z.is_alive() and z.vulnerable and dist < collision_radius:
                     z.alive = False
                     blade_hit = True

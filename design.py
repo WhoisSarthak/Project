@@ -37,9 +37,9 @@ def load_image(path, width, height):
 
 def draw_player(screen, x, y, radius):
     """Draw player - image or circle."""
-    img = load_image(PLAYER_IMG, radius * 2, radius * 2)
+    img = load_image(PLAYER_IMG, radius * 4, radius * 4)
     if img:
-        screen.blit(img, (int(x) - radius, int(y) - radius))
+        screen.blit(img, (int(x) - radius * 2, int(y) - radius * 2))
     else:
         pygame.draw.circle(screen, (50, 200, 220), (int(x), int(y)), radius)
 
@@ -47,9 +47,9 @@ def draw_player(screen, x, y, radius):
 def draw_zombie(screen, x, y, radius, king=False, dt=0.016):
     """Draw zombie - image or circle."""
     img_path = ZOMBIE_KING_IMG if king else ZOMBIE_IMG
-    img = load_image(img_path, radius * 3, radius * 3)
+    img = load_image(img_path, radius * 6, radius * 6)
     if img:
-        screen.blit(img, (int(x) - radius * 1.5, int(y) - radius * 1.5))
+        screen.blit(img, (int(x) - radius * 3, int(y) - radius * 3))
     else:
         color = (180, 0, 180) if king else (170, 60, 60)
         pygame.draw.circle(screen, color, (int(x), int(y)), radius)
