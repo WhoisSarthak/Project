@@ -18,6 +18,9 @@ ANIMATIONS = {
 # Cache for loaded sprite frames
 _sprite_cache = {}
 
+# Cache for zombie animated sprites
+_zombie_sprites = {}
+
 
 def load_image(path, width, height):
     """Load image from path, return scaled surface or None if not found."""
@@ -128,11 +131,16 @@ def draw_player(screen, x, y, radius):
 
 
 def draw_zombie(screen, x, y, radius, king=False):
-    """Draw zombie - image or circle."""
-    img = load_image(ZOMBIE_IMG, radius * 2, radius * 2)
-    if img:
-        screen.blit(img, (int(x) - radius, int(y) - radius))
-    else:
+    """Draw zombie - animated sprite or circle."""
+    # Use animated sprite if available
+    sprite_key = "king" if king else "regular"
+    if sprite_key not in _zombie_sprites:
+        # Create animated sprite for idle animation
+        _zombie_sprites[sprite_key] = AnimatedSprite("idle", scale_width=radius * 2, scale_height=radius * 2)
+    
+    sprite = _zombie_sprites[sprite_key]
+    if not sprite.draw(screen, int(x) - radius, int(y) - radius):
+        # Fallback to circle if animation not found
         color = (180, 0, 180) if king else (170, 60, 60)
         pygame.draw.circle(screen, color, (int(x), int(y)), radius)
 
