@@ -221,11 +221,11 @@ class Zombie:
             self.throw_timer = 0
             projectiles.append(Projectile(self.x, self.y, player.x, player.y, self))
 
-    def draw(self, screen):
+    def draw(self, screen, dt=0.016):
         """Draw zombie."""
         if not self.alive:
             return
-        draw_zombie(screen, self.x, self.y, self.radius, self.king)
+        draw_zombie(screen, self.x, self.y, self.radius, self.king, dt)
 
     def is_alive(self):
         """Check if zombie is alive."""
@@ -328,9 +328,9 @@ def run_game(screen, clock, difficulty):
         # Render
         screen.fill((15, 15, 20))
         
-        player.draw(screen)
-        for z in room.zombies:
-            z.draw(screen)
+    player.draw(screen)
+    for z in room.zombies:
+        z.draw(screen, dt)
         for p in projectiles:
             p.draw(screen)
 

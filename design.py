@@ -130,7 +130,7 @@ def draw_player(screen, x, y, radius):
         pygame.draw.circle(screen, (50, 200, 220), (int(x), int(y)), radius)
 
 
-def draw_zombie(screen, x, y, radius, king=False):
+def draw_zombie(screen, x, y, radius, king=False, dt=0.016):
     """Draw zombie - animated sprite or circle."""
     # Use animated sprite if available
     sprite_key = "king" if king else "regular"
@@ -139,6 +139,7 @@ def draw_zombie(screen, x, y, radius, king=False):
         _zombie_sprites[sprite_key] = AnimatedSprite("idle", scale_width=radius * 2, scale_height=radius * 2)
     
     sprite = _zombie_sprites[sprite_key]
+    sprite.update(dt)  # Update animation frame
     if not sprite.draw(screen, int(x) - radius, int(y) - radius):
         # Fallback to circle if animation not found
         color = (180, 0, 180) if king else (170, 60, 60)
