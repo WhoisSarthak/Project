@@ -3,7 +3,7 @@ import os
 
 # Asset paths
 ZOMBIE_FOLDER = "assets/zombie"  # Folder containing idle.png, attack.png, dead.png
-PLAYER_IMG = "assets/player.png"
+PLAYER_IMG = "assest/player/idle.png"
 ZOMBIE_IMG = "assets/zombie.png"
 PROJECTILE_IMG = "assets/projectile.png"
 SWORD_IMG = "assets/sword.png"
