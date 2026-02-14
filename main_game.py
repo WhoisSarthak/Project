@@ -59,7 +59,7 @@ class Player:
     def __init__(self, x, y):
         self.x = x
         self.y = y
-        self.radius = 16
+        self.radius = 20
         self.max_hp = 100
         self.hp = self.max_hp
         self.blade = Blade(self)
