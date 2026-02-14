@@ -57,9 +57,9 @@ def draw_zombie(screen, x, y, radius, king=False, dt=0.016):
 
 def draw_projectile(screen, x, y, radius, is_king=False):
     """Draw projectile (brain) - image or circle."""
-    img = load_image(PROJECTILE_IMG, radius * 2, radius * 2)
+    img = load_image(PROJECTILE_IMG, radius * 4, radius * 4)
     if img:
-        screen.blit(img, (int(x) - radius, int(y) - radius))
+        screen.blit(img, (int(x) - radius * 2, int(y) - radius * 2))
     else:
         color = (255, 140, 0) if is_king else (230, 70, 70)
         pygame.draw.circle(screen, color, (int(x), int(y)), radius)
