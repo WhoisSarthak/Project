@@ -20,8 +20,10 @@ def load_image(path, width, height):
         try:
             img = pygame.image.load(path)
             return pygame.transform.scale(img, (width, height))
-        except:
+        except Exception as e:
+            print(f"[v0] Error loading image {path}: {e}")
             return None
+    print(f"[v0] Image file not found: {path}")
     return None
 
 

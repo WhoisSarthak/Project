@@ -300,9 +300,11 @@ def run_game(screen, clock, difficulty):
         # Blade collision with zombies
         if blade_tip and player.blade.active:
             bx, by = blade_tip
+            blade_hit = False
             for z in room.zombies:
                 if z.is_alive() and z.vulnerable and math.hypot(z.x - bx, z.y - by) < z.radius:
                     z.alive = False
+                    blade_hit = True
                     
                     if z.king:
                         # King zombie killed
@@ -320,10 +322,11 @@ def run_game(screen, clock, difficulty):
                             room.generate_zombies()
                         
                         projectiles.clear()
-                        
-                        # Reset zombie vulnerability
-                        for z in room.zombies:
-                            z.vulnerable = False
+            
+            # Reset zombie vulnerability after blade hit
+            if blade_hit:
+                for z in room.zombies:
+                    z.vulnerable = False
 
         # Render
         screen.fill((15, 15, 20))
